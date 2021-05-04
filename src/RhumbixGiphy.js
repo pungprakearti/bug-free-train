@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './RhumbixGiphy.scss'
 
 const RhumbixGiphy = () => {
   const [gif, setGif] = useState(null)
@@ -15,17 +16,24 @@ const RhumbixGiphy = () => {
     }
 
     const resJSON = await res.json()
-    const webpageURL = resJSON.data[0].images.original.url
-    const tempArr = webpageURL.split('/')
+    const webpageURL = resJSON?.data[0]?.images?.original?.url
 
-    setGif(`https://i.giphy.com/media/${tempArr[4]}/giphy.gif`)
+    if(webpageURL) {
+      const tempArr = webpageURL.split('/')
+      setGif(`https://i.giphy.com/media/${tempArr[4]}/giphy.gif`)
+    } else {
+      console.log('no images found')
+    }
   }
 
+  // Controlled input
   const handleChange = (e) => {
     setSearchTerm(e.target.value)
   }
 
-  const handleClick = () => {
+  // On Submit
+  const handleSubmit = (e) => {
+    e.preventDefault()
     if(searchTerm) {
       fetchGiphy(searchTerm)
     }
@@ -33,11 +41,17 @@ const RhumbixGiphy = () => {
 
   return (
     <div className='RhumbixGiphy'>
-      <input name='searchTerm' type='text' onChange={handleChange} value={searchTerm} />
-      <button onClick={handleClick}>GIF ME</button>
-      {gif && (
-        <img src={gif} alt='Gif result from gif search' />
-      )}
+      <div className='RhumbixGiphy_Left'>
+        <form onSubmit={handleSubmit}>
+          <input name='searchTerm' type='text' onChange={handleChange} value={searchTerm} />
+          <button>GIF ME</button>
+        </form>
+      </div>
+      <div className='RhumbixGiphy_Right'>
+        {gif && (
+          <img src={gif} alt='Gif result from gif search' />
+        )}
+      </div>
     </div>
   )
 }

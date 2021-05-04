@@ -57,7 +57,7 @@ const TestWrapper = (props) => {
             <div className='TestWrapper_HeaderTitle'>
               Technical test
             </div>
-            <a className='TestWrapper_HeaderRepo' target='_blank' rel='noreferrer' href='https://github.com/pungprakearti'>
+            <a className='TestWrapper_HeaderRepo' target='_blank' rel='noreferrer' href='https://github.com/pungprakearti/bug-free-train'>
               Check out the code
             </a>
           </div>
