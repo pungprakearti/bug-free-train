@@ -1,0 +1,200 @@
+// Colors ***************************************
+$brand-primary: #ffb600;
+$font-gray: #a8a8a8;
+$font-darker-gray: #6a6a6a;
+$gray: #4c4c4c;
+$darker-gray: #2e2e2e;
+$darkest-gray: #262626;
+$off-white: #f5f5f5;
+$white: #fff;
+$black: #1f1f1f;
+$background-black: #0a0a0a;
+
+// Typography ***********************************
+$base-font-size: 16px;
+
+// Convert px to rem
+@function rem($pixelSize) {
+  $remSize: $pixelSize / $base-font-size;
+
+  @return #{$remSize}rem;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src:  local('roboto'), url('./fonts/roboto-regular.ttf');
+  src:  url('./fonts/roboto-regular.ttf') format('truetype'),
+        url('./fonts/roboto-regular.woff') format('woff'),
+        url('./fonts/roboto-regular.woff2') format('woff2')
+}
+
+@mixin roboto () {
+  font-family: roboto, sans-serif;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin h1 () {
+  @include roboto;
+
+  font-size: rem(56px);
+  font-weight: 500;
+  line-height: 1.2em;
+  color: $brand-primary;
+  margin: 0;
+
+  @include breakpoint(md-down) {
+    font-size: rem(40px);
+  }
+}
+
+@mixin h2 () {
+  @include roboto;
+
+  font-size: rem(32px);
+  font-weight: 700;
+  line-height: 1;
+  color: $black;
+  margin: 0;
+
+  @include breakpoint(md-down) {
+    font-size: rem(25px);
+    line-height: 1.25;
+  }
+}
+
+@mixin body () {
+  @include roboto;
+
+  font-size: rem(20px);
+  font-weight: 400;
+  line-height: 1.6em;
+  color: $font-gray;
+}
+
+// Grid *****************************************
+$breakpoints: (
+  'sm-up': (min-width: 501px),
+  'md-up': (min-width: 768px),
+  'lg-up': (min-width: 1025px),
+  'xs-down': (max-width: 500.98px),
+  'sm-down': (max-width: 768.98px),
+  'md-down': (max-width: 1024.98px),
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Hugo Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin breakpoint($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    @warn 'Unfortunately, no value could be retrieved from `#{$breakpoint}`. '
+      + 'Available breakpoints are: #{map-keys($breakpoints)}.';
+  }
+}
+
+@mixin breakpointOnly($breakpointMin, $breakpointMax) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpointMin) and map-has-key($breakpoints, $breakpointMax) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $breakpointMin))} and #{inspect(map-get($breakpoints, $breakpointMax))} {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    @warn 'Unfortunately, no value could be retrieved from either `#{$breakpointMin}` or `#{$breakpointMax}`. '
+      + 'Available breakpoints are: #{map-keys($breakpoints)}.';
+  }
+}
+
+$container-width: 1100px;
+$container-padding: 40px;
+$container-padding-tablet: 40px;
+$container-padding-mobile: 20px;
+
+@mixin container {
+  width: 100%;
+  max-width: $container-width + ($container-padding * 2);
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $container-padding;
+  padding-left: $container-padding;
+
+  @include breakpoint(md-down) {
+    padding-right: $container-padding-tablet;
+    padding-left: $container-padding-tablet;
+  }
+
+  @include breakpoint(sm-down) {
+    padding-right: $container-padding-mobile;
+    padding-left: $container-padding-mobile;
+  }
+
+  .container & {
+    max-width: unset;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+// Miscellaneous ********************************
+$transition-duration: 0.25s;
+$header-height: 116px;
+
+// Global ***************************************
+html {
+  font-size: $base-font-size;
+  box-sizing: border-box;
+  background-color: $darker-gray;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1 {
+  @include h1;
+}
+
+h2 {
+  @include h2;
+}
+
+body {
+  @include body;
+
+  margin: 0;
+  overflow-x: hidden;
+}
+
+p {
+  margin-top: 13px;
+  margin-bottom: 0;
+}
+
+.container {
+  @include container;
+}
+
+a {
+  text-decoration: none;
+  font-style: normal;
+}
+
+img {
+  display: block;
+}

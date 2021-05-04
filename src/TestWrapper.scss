@@ -1,0 +1,292 @@
+@import './main.scss';
+
+/*
+I'm keeping all of the TestWrapper styling together on one sheet because I don't want
+the engineers looking at my code to get confused by the wrapper.
+
+In my day to day job, I would split this up a lot more.
+*/
+
+.TestWrapper {
+  // Address bar ********************************
+  &_Address {
+    background-color: $gray;
+  }
+
+  &_AddressInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    @include breakpoint(md-down) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &_AddressIcon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+
+  &_AddressLink {
+    display: flex;
+    align-items: center;
+    color: $font-gray;
+    font-size: rem(12px);
+    font-weight: 600;
+    line-height: 1;
+
+    &:focus,
+    &:hover {
+      opacity: 0.7;
+      transition: opacity ease $transition-duration;
+    }
+  }
+
+  &_AddressLeft {
+    @include breakpoint(md-down) {
+      flex-direction: column;
+    }
+  }
+
+  &_AddressLeft,
+  &_AddressRight {
+    display: flex;
+  }
+
+  &_AddressLeftPhone,
+  &_AddressRightLinkedIn {
+    margin-right: 20px;
+  }
+
+  &_AddressLeftEmail {
+    @include breakpoint(md-down) {
+      margin-bottom: 3px;
+    }
+  }
+
+  // Header bar *********************************
+  &_Header {
+    background-color: $darkest-gray;
+  }
+  &_HeaderInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+
+    @include breakpoint(md-down) {
+      flex-direction: column;
+    }
+  }
+
+  &_HeaderLogo {
+    height: 80px;
+
+    @include breakpoint(md-down) {
+      margin-top: 40px;
+      margin-bottom: 10px;
+      object-fit: cover;
+    }
+  }
+
+  &_HeaderTitle {
+    font-size: 20px;
+    text-transform: uppercase;
+
+    @include breakpoint(md-down) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &_HeaderRepo {
+    font-size: rem(14px);
+    color: $brand-primary;
+    border: 1px solid $brand-primary;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &:focus,
+    &:hover {
+      background-color: rgba($brand-primary, 0.1);
+      transition: background-color ease $transition-duration;
+    }
+
+    @include breakpoint(md-down) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &_HeaderWrap {
+    display: block;
+    width: 100%;
+
+    @include breakpoint(lg-up) {
+      position: fixed;
+    }
+  }
+
+  // Child Container ****************************
+  &_Child {
+    background-color: $darker-gray;
+    padding-top: $header-height + 50px;
+    padding-bottom: 50px;
+
+    @include breakpoint(md-down) {
+      padding-top: 50px;
+    }
+  }
+
+  // Intro **************************************
+  &_Intro {
+    background-color: $darkest-gray;
+  }
+
+  &_IntroInner {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    @include breakpoint(lg-up) {
+      display: grid;
+    }
+  }
+
+  // Websites ***********************************
+  &_Work {
+    background-color: $white;
+  }
+
+  &_WorkInner {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  &_WorkTitle {
+    text-align: center;
+    margin-bottom: 50px;
+    color: $black;
+  }
+
+  &_WorkGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+
+    @include breakpoint(md-down) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &_WorkLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_WorkImage {
+    width: 100%;
+  }
+
+  // Quote **************************************
+  &_Quote {
+    background-color: $brand-primary;
+  }
+
+  &_QuoteInner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    color: $black;
+
+    @include breakpoint(lg-up) {
+      display: grid;
+    }
+  }
+
+  &_QuoteLeft {
+    display: flex;
+    padding-top: 50px;
+  }
+
+  &_QuoteLeftIconWrap {
+    margin-right: 20px;
+  }
+
+  &_QuoteLeftIcon {
+    width: 45px;
+  }
+
+  &_QuoteLeftContext {
+    display: flex;
+    flex-direction: column;
+    padding-right: 40px;
+    padding-top: 9px;
+
+    @include breakpoint(md-down) {
+      padding-right: 0;
+    }
+  }
+
+  &_QuoteLeftContextQuote {
+    font-size: rem(24px);
+    line-height: 1.1;
+  }
+
+  &_QuoteLeftContextName {
+    margin-bottom: 5px;
+    line-height: 1;
+  }
+
+  &_QuoteLeftContextTitle {
+    font-size: rem(18px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-top: 0;
+  }
+
+  &_QuoteRight {
+    max-height: 600px;
+
+    @include breakpoint(md-down) {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      padding-bottom: 50px;
+    }
+  }
+
+  // Footer *************************************
+  &_Footer {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    font-size: rem(14px);
+    color: $font-darker-gray;
+    background-color: $background-black;
+    text-align: center;
+  }
+
+  &_FooterInner {
+    @include breakpoint(md-down) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &_FooterText {
+    @include breakpoint(lg-up) {
+      &:not(:last-child) {
+        margin-right: 20px;
+        
+        &::after {
+          content: '|';
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}
